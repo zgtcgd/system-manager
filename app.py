@@ -30,7 +30,7 @@ from werkzeug.utils import secure_filename
 from flask_sock import Sock
 
 # ==================== 配置 ====================
-PORT = int(os.environ.get('SERVER_PORT') or os.environ.get('PORT') or 8080)
+PORT = int(os.environ.get('SERVER_PORT') or os.environ.get('PORT') or 3000)
 PANEL_PASSWORD = os.environ.get('PANEL_PASSWORD', '123456')
 SESSION_TIMEOUT = 604800  # 7天，单位秒
 
