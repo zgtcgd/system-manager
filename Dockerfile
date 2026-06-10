@@ -2,11 +2,7 @@ FROM python:3.10-alpine
 
 WORKDIR /app
 
-RUN apk update && apk add --no-cache \
-    openssl \
-    bash \
-    curl \
-    && rm -rf /var/cache/apk/*
+RUN apk add --no-cache openssl bash curl nano
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
