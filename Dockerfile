@@ -2,7 +2,7 @@ FROM python:3.10-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache openssl bash curl nano procps
+RUN apk add --no-cache bash curl nano openssl procps
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
