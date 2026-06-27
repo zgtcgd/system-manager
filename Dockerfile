@@ -9,7 +9,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app.py .
 
-ENV PORT=3000
+ENV PORT=8080
 EXPOSE $PORT
 
 CMD ["python3", "app.py"]
