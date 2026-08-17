@@ -12,7 +12,11 @@ ENV BASE_DIR=/data
 
 COPY start.sh /app/
 
-RUN apk update && apk add --no-cache bash wget curl grep procps unzip git nodejs python uv &&\
+# 启用 community 仓库(uv 在其中),python 正确包名是 python3
+# 用 --repository 指定,不污染默认 repositories 文件
+RUN apk update && apk add --no-cache \
+      --repository https://dl-cdn.alpinelinux.org/alpine/latest-stable/community \
+      bash wget curl grep procps unzip git nodejs python3 uv &&\
     chmod -v 755 start.sh &&\
     mkdir -p /data && chmod 755 /data
 
