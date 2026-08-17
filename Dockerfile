@@ -6,14 +6,10 @@ ARG PORT=8080
 ENV PORT=$PORT
 EXPOSE $PORT
 
-# 持久化目录:面板 BASE_DIR 数据根(文件管理上传/创建的文件)
-# 运行时用 -v /宿主机目录:/data 挂载即可持久化
 ENV BASE_DIR=/data
 
 COPY start.sh /app/
 
-# 启用 community 仓库(uv 在其中),python 正确包名是 python3
-# 用 --repository 指定,不污染默认 repositories 文件
 RUN apk update && apk add --no-cache \
       --repository https://dl-cdn.alpinelinux.org/alpine/latest-stable/community \
       bash wget curl grep procps unzip git nodejs python3 uv &&\
@@ -22,7 +18,6 @@ RUN apk update && apk add --no-cache \
 
 VOLUME ["/data"]
 
-# Health check(面板无 /healthcheck 端点,探根路径 / 返回 200 即健康)
 HEALTHCHECK --interval=2m --timeout=30s CMD wget -qO- http://localhost:${PORT}/ >/dev/null 2>&1 || exit 1
 
 ENTRYPOINT [ "./start.sh" ]
