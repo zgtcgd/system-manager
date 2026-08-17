@@ -1,15 +1,15 @@
-FROM python:3.10-alpine
+FROM node:alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache bash curl nano openssl procps
+RUN apk add --no-cache bash wget curl git unzip nano openssl procps python3 python3-pip
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app.py .
 
-ENV PORT=3000
+ENV PORT=8080
 EXPOSE $PORT
 
 CMD ["python3", "app.py"]
